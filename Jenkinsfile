@@ -4,6 +4,11 @@ pipeline {
     triggers{
         pollSCM('* * * * *')
     }
+
+    environment {
+        DMALL_DOCKER_REGISTRY='ec2-54-95-48-23.ap-northeast-1.compute.amazonaws.com:5000'
+        SLUG='liuyu'
+    }
     
     stages {
         stage('Build') {
@@ -14,7 +19,7 @@ pipeline {
 
         stage('Docker image') {
             steps{
-                sh 'echo "image"'
+                sh './genImages.sh'
             }
         }
 
